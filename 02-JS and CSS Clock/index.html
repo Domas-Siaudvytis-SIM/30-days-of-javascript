@@ -9,9 +9,15 @@
 
     <div class="clock">
       <div class="clock-face">
-        <div class="hand hour-hand"></div>
-        <div class="hand min-hand"></div>
-        <div class="hand second-hand"></div>
+        <div class="hand hour-hand">
+          <div class="actual hour"></div>
+        </div>
+        <div class="hand min-hand">
+          <div class="actual min"></div>
+        </div>
+        <div class="hand second-hand">
+          <div class="actual second"></div>
+        </div>
       </div>
     </div>
 
@@ -59,13 +65,27 @@
     .hand {
       width:50%;
       height:6px;
-      background:black;
       position: absolute;
       top:50%;
       transform-origin: 100%;
       transform: rotate(90deg);
       transition: all 0.05s;
       transition-timing-function: cubic-bezier(0, 0, 0.63, 1.42);
+    }
+
+    .actual {
+      background:black;
+      height: 6px;
+      float: right;
+    }
+    .hour {
+      width: 50%;
+    }
+    .min {
+      width: 70%;
+    }
+    .second {
+      width: 100%;
     }
 
   </style>
