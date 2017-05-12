@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Console Tricks!</title>
+</head>
+<body>
+
+  <p onClick="makeGreen()">×BREAK×DOWN×</p>
+
+  <script>
+    const dogs = [{ name: 'Snickers', age: 2 }, { name: 'hugo', age: 8 }];
+
+		// Interpolated
+		// console logged strings can be interpolated with %s
+		console.log('My name is %s', '💩');
+
+    // Styled
+		// console text can be styled with CSS properties
+		console.log('%cthis is fine', 'color: red; background-color: black; font-size: 20px;');
+
+    // warning!
+		console.warn('This is a warning');
+
+    // Error :|
+		console.error('This is an error');
+
+    // Info
+		console.info('This is an info');
+
+    // Testing
+		console.assert(true, 'This will log.');
+		console.assert(false, 'This will not.');
+
+    // clearing
+		// Actually, nothing of the above will log
+		console.clear();
+
+    // Viewing DOM Elements
+		const p = document.querySelector('p');
+		console.dir(p);
+
+    // Grouping together
+		// use group/groupEnd to group logs into a collapsible collection
+		// use groupCollapsed/groupEnd to make the group initially collapsed
+		dogs.forEach( dog => {
+			console.group(dog.name);
+			console.log(`This is ${dog.name}`);
+			console.log(`He is ${dog.age} years old`);
+			console.groupEnd(dog.name);
+		});
+
+    // counting
+		// count the number of times a particular count is called
+		console.count('two');
+		console.count('one');
+		console.count('two');
+
+    // timing
+		// Use time/timeEnd to time code execution
+		console.time('fetching data');
+		fetch('https://api.github.com/users/wesbos')
+			.then(data => data.json())
+			.then(data => {
+				console.timeEnd('fetching data');
+				console.log(data);
+			});
+
+			// table
+			// console.table displays data sets with common properties in a nice table
+			console.table(dogs);
+
+  </script>
+</body>
+</html>
