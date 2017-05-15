@@ -104,14 +104,13 @@ let lastChecked = '';
 let shiftsDown = 0;
 
 function boxChanged(e){
-  if(shiftsDown && lastChecked && e.currentTarget.checked) {
+  if(shiftsDown > 0 && lastChecked) {
     const checkedIndex = boxes.indexOf(e.currentTarget);
-    const [first, last] = lastChecked < checkedIndex ? [lastChecked, checkedIndex] : [checkedIndex, lastChecked];
+    const [first, last] = lastChecked < checkedIndex ? [lastChecked+1, checkedIndex] : [checkedIndex, lastChecked-1];
     boxes.slice(first, last+1).forEach( box => box.checked = true );
   }
-  if(e.currentTarget.checked){
-    lastChecked = boxes.indexOf(e.currentTarget);
-  }
+
+  lastChecked = boxes.indexOf(e.currentTarget);
 }
 
 window.addEventListener('keydown', e => shiftsDown += e.keyCode == 16 ? 1 : 0);
