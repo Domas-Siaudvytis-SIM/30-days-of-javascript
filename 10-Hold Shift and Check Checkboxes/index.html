@@ -100,22 +100,19 @@
 
 <script>
 const boxes = Array.from(document.querySelectorAll('input[type=checkbox]'));
-let lastChecked = '';
-let shiftsDown = 0;
+let lastChecked = -1;
 
 function boxChanged(e){
-  if(shiftsDown > 0 && lastChecked) {
-    const checkedIndex = boxes.indexOf(e.currentTarget);
+  if(e.shiftKey && lastChecked > -1) {
+    const checkedIndex = boxes.indexOf(e.target);
     const [first, last] = lastChecked < checkedIndex ? [lastChecked+1, checkedIndex] : [checkedIndex, lastChecked-1];
     boxes.slice(first, last+1).forEach( box => box.checked = true );
   }
 
-  lastChecked = boxes.indexOf(e.currentTarget);
+  lastChecked = boxes.indexOf(e.target);
 }
 
-window.addEventListener('keydown', e => shiftsDown += e.keyCode == 16 ? 1 : 0);
-window.addEventListener('keyup', e => shiftsDown -= e.keyCode == 16 ? 1 : 0);
-boxes.forEach( box => box.addEventListener('change', boxChanged));
+boxes.forEach( box => box.addEventListener('click', boxChanged));
 
 
 </script>
